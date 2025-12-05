@@ -26,4 +26,29 @@ def interpret_weather_code(code: int) -> str:
     elif 95 <= code <= 99:
         return "Thunderstorm"
     return "Unknown"
+# ----------------------------
+# MAIN ALERT FUNCTION
+# ----------------------------
+def check_alert(weather: dict, alert_temp: float):
+    if not weather or "temperature" not in weather:
+        logging.warning("Missing weather data for alert check")
+        return False
 
+    temp = weather["temperature"]
+    wind = weather.get("windspeed", 0)
+    code = weather.get("weathercode", None)
+
+    condition = interpret_weather_code(code)
+
+    print(f"\n{Fore.CYAN}Weather Condition: {condition}")
+
+    alert_triggered = False
+
+    # ------------------ TEMP ALERT ------------------
+    if temp >= alert_temp:
+        print(f"{Fore.RED}🔥 TEMPERATURE ALERT: {temp}°C >= {alert_temp}°C")
+        play_alert_sound()
+        turtle_clean_skull_alert()
+        alert_triggered = True
+
+    
