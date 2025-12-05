@@ -52,3 +52,32 @@ def check_alert(weather: dict, alert_temp: float):
         alert_triggered = True
 
     
+
+    # ------------------ RAIN ALERT ------------------
+    if condition in ["Rain", "Rain showers", "Freezing rain", "Light drizzle"]:
+        print(f"{Fore.BLUE}🌧 It is raining: {condition}")
+        alert_triggered = True
+
+    if condition in ["Rain showers", "Freezing rain", "Thunderstorm"]:
+        print(f"{Fore.RED}⚠ HEAVY RAIN ALERT!")
+        play_alert_sound()
+        alert_triggered = True
+
+    # ------------------ WIND ALERTS ------------------
+    if wind > 40:
+        print(f"{Fore.RED}🌀 SEVERE WIND ALERT: {wind} km/h")
+        play_alert_sound()
+        turtle_clean_skull_alert()
+        alert_triggered = True
+    elif wind > 25:
+        print(f"{Fore.MAGENTA}⚠ STRONG WIND: {wind} km/h")
+        play_alert_sound()
+        alert_triggered = True
+    elif wind > 5:
+        print(f"{Fore.CYAN}💨 Windy: {wind} km/h")
+        play_alert_sound()
+        alert_triggered = True
+
+    logging.info(f"Alert Check | Temp={temp} | Wind={wind} | Condition={condition}")
+    return alert_triggered
+
