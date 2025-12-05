@@ -9,12 +9,7 @@ A powerful, multi-feature command-line weather monitoring system built in Python
 Install the package from PyPI:
 
 ```bash
-pip install weather-harvester
-```
-
-### Full Installation (Recommended)
-
-For complete functionality including rich CLI interface, map visualization, and desktop notifications:
+pip install weather-harvestor
 
 ```bash
 pip install weather-harvester
@@ -204,7 +199,7 @@ python -m unittest discover tests
 - Python 3.7+
 - colorama (automatically installed with package)
 
-**Optional Requirements (for full features):**
+
 - `rich` - Enhanced CLI interface with better formatting
 - `folium` - Map visualization support
 - `plyer` - Desktop notification alerts
