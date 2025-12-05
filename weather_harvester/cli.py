@@ -63,4 +63,3 @@ def get_args(arg_list=None):
         help="Export cached weather data to CSV"
     )
 
-    
