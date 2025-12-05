@@ -5,9 +5,6 @@ from weather_harvester.turtle_alert import turtle_clean_skull_alert
 
 init(autoreset=True)
 
-# ----------------------------
-# WEATHER CODE INTERPRETER
-# ----------------------------
 def interpret_weather_code(code: int) -> str:
     if code == 0:
         return "Clear sky"
@@ -26,9 +23,7 @@ def interpret_weather_code(code: int) -> str:
     elif 95 <= code <= 99:
         return "Thunderstorm"
     return "Unknown"
-# ----------------------------
-# MAIN ALERT FUNCTION
-# ----------------------------
+
 def check_alert(weather: dict, alert_temp: float):
     if not weather or "temperature" not in weather:
         logging.warning("Missing weather data for alert check")
@@ -81,3 +76,28 @@ def check_alert(weather: dict, alert_temp: float):
     logging.info(f"Alert Check | Temp={temp} | Wind={wind} | Condition={condition}")
     return alert_triggered
 
+
+def play_alert_sound():
+    os_name = platform.system()
+
+    try:
+        if os_name == "Windows":
+            import winsound
+            for _ in range(5):
+                winsound.Beep(1500, 150)
+                winsound.Beep(900, 150)
+        else:
+            print("\a")
+
+    except Exception as e:
+        logging.error(f"Sound error: {e}")
+
+
+def detect_trend(prev_temp, new_temp):
+    if prev_temp is None:
+        return "no-data"
+    if new_temp > prev_temp:
+        return "rising"
+    elif new_temp < prev_temp:
+        return "dropping"
+    return "stable"
