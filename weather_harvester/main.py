@@ -19,3 +19,37 @@ def validate_city_name(city: str) -> bool:
     return bool(re.match(r"^[A-Za-z\s\-]+$", city))
 
 
+
+#CITY LIST BUILDER 
+
+def build_city_list(args, cfg) -> list[str]:
+    cities = []
+
+    # -c Delhi -c Pune
+    if args.cities:
+        if isinstance(args.cities, list):
+            cities.extend(args.cities)
+
+    # positional: weather-harvester Delhi
+    if args.positional_city:
+        cities.extend(args.positional_city)
+
+    # --export-csv
+    if args.export_csv:
+        export_cache_to_csv()
+
+    # default city
+    if not cities:
+        cities = [cfg["city"]]
+
+    # validation
+    valid = []
+    for c in cities:
+        if validate_city_name(c):
+            valid.append(c)
+        else:
+            print(f"\n❌ Invalid city name: {c}")
+            print("Allowed: letters, spaces, hyphens")
+            exit(1)
+
+    return valid
