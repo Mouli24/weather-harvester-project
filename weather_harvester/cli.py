@@ -63,3 +63,44 @@ def get_args(arg_list=None):
         help="Export cached weather data to CSV"
     )
 
+    # LOGGING & CONFIG 
+    parser.add_argument(
+        "--log-level",
+        type=str,
+        default="INFO",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        help="Logging level"
+    )
+
+    parser.add_argument(
+        "--config",
+        type=str,
+        default="config/config.ini",
+        help="Path to configuration file"
+    )
+
+    # ALERT OPTIONS 
+    parser.add_argument(
+        "--alert-temp",
+        type=float,
+        help="Trigger alert if temperature exceeds this threshold (°C)"
+    )
+
+    parser.add_argument(
+        "--alert-low",
+        type=float,
+        help="Trigger alert if temperature drops below this threshold (°C)"
+    )
+
+    #  MISCELLANEOUS 
+    parser.add_argument(
+        "--map",
+        action="store_true",
+        help="Open city location in Google Maps"
+    )
+
+    # TESTING SUPPORT 
+    if arg_list is not None:
+        return parser.parse_args(arg_list)
+
+    return parser.parse_args()
