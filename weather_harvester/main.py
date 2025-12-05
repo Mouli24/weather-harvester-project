@@ -5,6 +5,13 @@ from weather_harvester.cache import load_cache, save_cache, clear_cache
 from weather_harvester.logging_system import setup_logging
 from weather_harvester.alerts import check_alert
 from weather_harvester.exporter import export_cache_to_csv, print_cache_as_table
+
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from colorama import Fore, Style
+import logging
+import webbrowser
+import re
+
 #  MAP UTILITY 
 
 def open_map(lat, lon):
